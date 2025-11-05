@@ -1,11 +1,8 @@
 import {
   Activity,
   ArrowUpRight,
-  CircleUser,
-  CreditCard,
-  DollarSign,
-  HeartPulse,
   Menu,
+  HeartPulse,
   Package2,
   PieChart,
   Search,
@@ -44,6 +41,14 @@ const totalPatients = patients.length;
 const mediumRiskCount = patients.filter(
   (p) => p.riskLevel === 'Medium'
 ).length;
+
+const totalScreenings = patients.reduce((acc, patient) => {
+    // Simple logic: count if they have values for key metrics
+    if (patient.bpSystolic && patient.sugarLevel && patient.bmi) {
+        return acc + 1;
+    }
+    return acc;
+}, 0);
 
 export default function Dashboard() {
   return (
@@ -104,9 +109,9 @@ export default function Dashboard() {
               <Users className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">+52</div>
+              <div className="text-2xl font-bold">+{totalScreenings}</div>
               <p className="text-xs text-muted-foreground">
-                in the last 7 days
+                in the last 30 days
               </p>
             </CardContent>
           </Card>
