@@ -5,7 +5,7 @@ export function Logo(props: React.SVGProps<SVGSVGElement>) {
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      aria-label="HealthSight Logo"
+      aria-label="Medibridge Logo"
     >
       <path
         d="M4.774,12.771C2.968,11.33,2,9.261,2,7.5C2,4.462,4.462,2,7.5,2c2.1,0,3.933,1.108,4.918,2.75"

@@ -95,11 +95,11 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           <Link
             href="/"
             className="flex items-center gap-2.5 text-primary"
-            aria-label="HealthSight Home"
+            aria-label="Medibridge Home"
           >
             <Logo className="w-8 h-8" />
             <span className="font-bold text-xl text-foreground">
-              HealthSight
+              Medibridge
             </span>
           </Link>
         </SidebarHeader>
