@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { MoreHorizontal, PlusCircle } from 'lucide-react';
 import {
   Table,
@@ -49,6 +50,7 @@ export function PatientTable({
   description,
   patients: initialPatients,
 }: PatientTableProps) {
+  const router = useRouter();
   const [open, setOpen] = React.useState(false);
   const [patients, setPatients] = React.useState(initialPatients);
 
@@ -60,6 +62,10 @@ export function PatientTable({
     };
     setPatients((prev) => [createdPatient, ...prev]);
     setOpen(false);
+  };
+
+  const handleRowClick = (patientId: string) => {
+    router.push(`/patients/${patientId}`);
   };
 
   return (
@@ -103,7 +109,11 @@ export function PatientTable({
                   (img) => img.id === patient.avatar
                 );
                 return (
-                  <TableRow key={patient.id}>
+                  <TableRow
+                    key={patient.id}
+                    onClick={() => handleRowClick(patient.id)}
+                    className="cursor-pointer"
+                  >
                     <TableCell className="hidden sm:table-cell">
                       {avatar ? (
                         <Image
@@ -131,7 +141,7 @@ export function PatientTable({
                       BP: {patient.bpSystolic}/{patient.bpDiastolic}, Sugar:{' '}
                       {patient.sugarLevel}, BMI: {patient.bmi}
                     </TableCell>
-                    <TableCell>
+                    <TableCell onClick={(e) => e.stopPropagation()}>
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                           <Button
@@ -146,7 +156,11 @@ export function PatientTable({
                         <DropdownMenuContent align="end">
                           <DropdownMenuLabel>Actions</DropdownMenuLabel>
                           <DropdownMenuItem>Edit</DropdownMenuItem>
-                          <DropdownMenuItem>View Details</DropdownMenuItem>
+                          <DropdownMenuItem
+                            onClick={() => handleRowClick(patient.id)}
+                          >
+                            View Details
+                          </DropdownMenuItem>
                           <DropdownMenuItem className="text-destructive">
                             Delete
                           </DropdownMenuItem>
