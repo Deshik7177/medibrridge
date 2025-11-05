@@ -3,7 +3,7 @@
 import * as React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { HeartPulse, LayoutDashboard, Settings, UsersRound } from 'lucide-react';
+import { LayoutDashboard, Settings, UsersRound } from 'lucide-react';
 
 import {
   SidebarProvider,
@@ -32,7 +32,6 @@ import { Logo } from '@/components/logo';
 const navItems = [
   { href: '/', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/patients', label: 'Patients', icon: UsersRound },
-  { href: '/risk-prediction', label: 'Risk Prediction', icon: HeartPulse },
 ];
 
 function MainNav() {
