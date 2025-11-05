@@ -32,15 +32,10 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import {
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
-  type ChartConfig,
-} from '@/components/ui/chart';
-import { Bar, BarChart, CartesianGrid, XAxis, Pie, PieChart as RechartsPieChart } from 'recharts';
 import { patients } from '@/lib/data';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
+import { AgeChart } from './components/age-chart';
+import { DiseaseChart } from './components/disease-chart';
 
 const highRiskPatients = patients
   .filter((p) => p.riskLevel === 'High')
@@ -49,36 +44,6 @@ const totalPatients = patients.length;
 const mediumRiskCount = patients.filter(
   (p) => p.riskLevel === 'Medium'
 ).length;
-
-const ageData = [
-  { ageGroup: '18-35', count: patients.filter(p => p.age >= 18 && p.age <= 35).length, fill: 'var(--color-group1)' },
-  { ageGroup: '36-50', count: patients.filter(p => p.age >= 36 && p.age <= 50).length, fill: 'var(--color-group2)' },
-  { ageGroup: '51-65', count: patients.filter(p => p.age >= 51 && p.age <= 65).length, fill: 'var(--color-group3)' },
-  { ageGroup: '65+', count: patients.filter(p => p.age > 65).length, fill: 'var(--color-group4)' },
-];
-
-const ageChartConfig: ChartConfig = {
-  count: {
-    label: 'Patients',
-  },
-  group1: { label: '18-35', color: 'hsl(var(--chart-1))' },
-  group2: { label: '36-50', color: 'hsl(var(--chart-2))' },
-  group3: { label: '51-65', color: 'hsl(var(--chart-3))' },
-  group4: { label: '65+', color: 'hsl(var(--chart-4))' },
-};
-
-const diseaseData = [
-    { condition: 'Hypertension', count: patients.filter(p => p.bpSystolic > 140).length, fill: 'var(--color-hypertension)'},
-    { condition: 'Diabetes', count: patients.filter(p => p.sugarLevel > 125).length, fill: 'var(--color-diabetes)'},
-    { condition: 'Obesity', count: patients.filter(p => p.bmi > 30).length, fill: 'var(--color-obesity)'},
-];
-
-const diseaseChartConfig: ChartConfig = {
-    count: { label: 'Patients' },
-    hypertension: { label: 'Hypertension', color: 'hsl(var(--chart-1))' },
-    diabetes: { label: 'Diabetes', color: 'hsl(var(--chart-2))' },
-    obesity: { label: 'Obesity', color: 'hsl(var(--chart-4))' },
-}
 
 export default function Dashboard() {
   return (
@@ -155,19 +120,7 @@ export default function Dashboard() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-               <ChartContainer config={diseaseChartConfig} className="min-h-[200px] w-full">
-                    <BarChart accessibilityLayer data={diseaseData}>
-                        <CartesianGrid vertical={false} />
-                        <XAxis
-                        dataKey="condition"
-                        tickLine={false}
-                        tickMargin={10}
-                        axisLine={false}
-                        />
-                        <ChartTooltip content={<ChartTooltipContent />} />
-                        <Bar dataKey="count" radius={8} />
-                    </BarChart>
-                </ChartContainer>
+               <DiseaseChart />
             </CardContent>
           </Card>
           <Card>
@@ -178,12 +131,7 @@ export default function Dashboard() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-                <ChartContainer config={ageChartConfig} className="min-h-[200px] w-full">
-                    <RechartsPieChart>
-                         <ChartTooltip content={<ChartTooltipContent nameKey="count" />} />
-                        <Pie data={ageData} dataKey="count" nameKey="ageGroup" />
-                    </RechartsPieChart>
-                </ChartContainer>
+                <AgeChart />
             </CardContent>
           </Card>
         </div>
