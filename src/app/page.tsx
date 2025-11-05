@@ -1,11 +1,9 @@
+'use client';
+
 import {
   Activity,
   ArrowUpRight,
-  Menu,
   HeartPulse,
-  Package2,
-  PieChart,
-  Search,
   Users,
   UsersRound,
 } from 'lucide-react';
@@ -43,12 +41,19 @@ const mediumRiskCount = patients.filter(
 ).length;
 
 const totalScreenings = patients.reduce((acc, patient) => {
-    // Simple logic: count if they have values for key metrics
-    if (patient.bpSystolic && patient.sugarLevel && patient.bmi) {
-        return acc + 1;
-    }
-    return acc;
+  // Simple logic: count if they have values for key metrics
+  if (patient.bpSystolic && patient.sugarLevel && patient.bmi) {
+    return acc + 1;
+  }
+  return acc;
 }, 0);
+
+const founders = [
+    { name: 'Ch Tejaswaroop', role: 'CEO', avatar: 'https://picsum.photos/seed/founder1/100/100' },
+    { name: 'Ahmed Raza', role: 'COO/CTO', avatar: 'https://picsum.photos/seed/founder2/100/100' },
+    { name: 'Hamid Raza', role: 'CFO', avatar: 'https://picsum.photos/seed/founder3/100/100' },
+    { name: 'Pranav Kumar', role: 'CMO', avatar: 'https://picsum.photos/seed/founder4/100/100' },
+];
 
 export default function Dashboard() {
   return (
@@ -101,7 +106,7 @@ export default function Dashboard() {
               </p>
             </CardContent>
           </Card>
-           <Card>
+          <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
                 Preventive Screenings
@@ -116,8 +121,8 @@ export default function Dashboard() {
             </CardContent>
           </Card>
         </div>
-        <div className="grid gap-4 md:gap-8 lg:grid-cols-2">
-           <Card>
+        <div className="grid gap-4 md:gap-8 lg:grid-cols-2 xl:grid-cols-3">
+          <Card className="xl:col-span-2">
             <CardHeader>
               <CardTitle>Disease Trends</CardTitle>
               <CardDescription>
@@ -125,7 +130,7 @@ export default function Dashboard() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-               <DiseaseChart />
+              <DiseaseChart />
             </CardContent>
           </Card>
           <Card>
@@ -136,83 +141,111 @@ export default function Dashboard() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-                <AgeChart />
+              <AgeChart />
             </CardContent>
           </Card>
         </div>
-        <Card>
-          <CardHeader className="flex flex-row items-center">
-             <div className="grid gap-2">
+         <div className="grid gap-4 md:gap-8 lg:grid-cols-2 xl:grid-cols-3">
+          <Card className="xl:col-span-2">
+            <CardHeader className="flex flex-row items-center">
+              <div className="grid gap-2">
                 <CardTitle>High-Risk Patients</CardTitle>
                 <CardDescription>
-                    Individuals requiring priority attention.
+                  Individuals requiring priority attention.
                 </CardDescription>
-            </div>
-            <Button asChild size="sm" className="ml-auto gap-1">
-              <Link href="/patients">
-                View All
-                <ArrowUpRight className="h-4 w-4" />
-              </Link>
-            </Button>
-          </CardHeader>
-          <CardContent>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Patient</TableHead>
-                  <TableHead className="hidden sm:table-cell">
-                    Risk Factors
-                  </TableHead>
-                  <TableHead className="text-right">Metrics</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {highRiskPatients.map((patient) => {
-                  const avatar = PlaceHolderImages.find(
-                    (img) => img.id === patient.avatar
-                  );
-                  return (
-                    <TableRow key={patient.id}>
-                      <TableCell>
-                        <div className="flex items-center gap-3">
-                          <Avatar className="hidden h-9 w-9 sm:flex">
-                            {avatar && (
-                              <AvatarImage
-                                src={avatar.imageUrl}
-                                alt={patient.name}
-                                data-ai-hint={avatar.imageHint}
-                              />
-                            )}
-                            <AvatarFallback>
-                              {patient.name.charAt(0)}
-                            </AvatarFallback>
-                          </Avatar>
-                          <div className="grid gap-0.5">
-                            <p className="font-medium">{patient.name}</p>
-                            <p className="text-xs text-muted-foreground">
-                              {patient.age} years, {patient.gender}
-                            </p>
+              </div>
+              <Button asChild size="sm" className="ml-auto gap-1">
+                <Link href="/patients">
+                  View All
+                  <ArrowUpRight className="h-4 w-4" />
+                </Link>
+              </Button>
+            </CardHeader>
+            <CardContent>
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Patient</TableHead>
+                    <TableHead className="hidden sm:table-cell">
+                      Risk Factors
+                    </TableHead>
+                    <TableHead className="text-right">Metrics</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {highRiskPatients.map((patient) => {
+                    const avatar = PlaceHolderImages.find(
+                      (img) => img.id === patient.avatar
+                    );
+                    return (
+                      <TableRow key={patient.id} className="cursor-pointer" onClick={() => (window.location.href = `/patients/${patient.id}`)}>
+                        <TableCell>
+                          <div className="flex items-center gap-3">
+                            <Avatar className="hidden h-9 w-9 sm:flex">
+                              {avatar && (
+                                <AvatarImage
+                                  src={avatar.imageUrl}
+                                  alt={patient.name}
+                                  data-ai-hint={avatar.imageHint}
+                                />
+                              )}
+                              <AvatarFallback>
+                                {patient.name.charAt(0)}
+                              </AvatarFallback>
+                            </Avatar>
+                            <div className="grid gap-0.5">
+                              <p className="font-medium">{patient.name}</p>
+                              <p className="text-xs text-muted-foreground">
+                                {patient.age} years, {patient.gender}
+                              </p>
+                            </div>
                           </div>
+                        </TableCell>
+                        <TableCell className="hidden sm:table-cell">
+                          <div className="flex flex-wrap gap-1">
+                            {patient.bpSystolic > 140 && (
+                              <Badge variant="destructive">High BP</Badge>
+                            )}
+                            {patient.sugarLevel > 125 && (
+                              <Badge variant="destructive">High Sugar</Badge>
+                            )}
+                            {patient.bmi > 30 && (
+                              <Badge variant="destructive">Obesity</Badge>
+                            )}
+                          </div>
+                        </TableCell>
+                        <TableCell className="text-right">
+                          BP: {patient.bpSystolic}/{patient.bpDiastolic}, BMI:{' '}
+                          {patient.bmi}
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
+                </TableBody>
+              </Table>
+            </CardContent>
+          </Card>
+            <Card>
+                <CardHeader>
+                    <CardTitle>Our Team</CardTitle>
+                    <CardDescription>The founding members of Medibridge.</CardDescription>
+                </CardHeader>
+                <CardContent className="grid gap-4">
+                    {founders.map((founder) => (
+                        <div key={founder.name} className="flex items-center gap-4">
+                            <Avatar className="h-10 w-10">
+                                <AvatarImage src={founder.avatar} alt={founder.name} data-ai-hint="person portrait" />
+                                <AvatarFallback>{founder.name.charAt(0)}</AvatarFallback>
+                            </Avatar>
+                            <div>
+                                <p className="font-semibold">{founder.name}</p>
+                                <p className="text-sm text-muted-foreground">{founder.role}</p>
+                            </div>
                         </div>
-                      </TableCell>
-                      <TableCell className="hidden sm:table-cell">
-                        <div className="flex flex-wrap gap-1">
-                            {patient.bpSystolic > 140 && <Badge variant="destructive">High BP</Badge>}
-                            {patient.sugarLevel > 125 && <Badge variant="destructive">High Sugar</Badge>}
-                            {patient.bmi > 30 && <Badge variant="destructive">Obesity</Badge>}
-                        </div>
-                      </TableCell>
-                      <TableCell className="text-right">
-                        BP: {patient.bpSystolic}/{patient.bpDiastolic}, BMI:{' '}
-                        {patient.bmi}
-                      </TableCell>
-                    </TableRow>
-                  );
-                })}
-              </TableBody>
-            </Table>
-          </CardContent>
-        </Card>
+                    ))}
+                </CardContent>
+            </Card>
+        </div>
       </main>
     </div>
   );
