@@ -97,7 +97,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             className="flex items-center gap-2.5 text-primary"
             aria-label="Medibridge Home"
           >
-            <Logo className="w-8 h-8" />
+            <Logo className="size-8" />
             <span className="font-bold text-xl text-foreground">
               Medibridge
             </span>
