@@ -1,5 +1,5 @@
-# Firebase Studio
+# HealthSight - Community Health Monitoring System
 
-This is a NextJS starter in Firebase Studio.
+This is a Next.js application for a Community Health Monitoring System, "HealthSight". It's built using Firebase Studio.
 
-To get started, take a look at src/app/page.tsx.
+To get started, explore the application structure starting from `src/app/page.tsx`.
