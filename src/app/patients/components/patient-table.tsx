@@ -54,11 +54,15 @@ export function PatientTable({
   const [open, setOpen] = React.useState(false);
   const [patients, setPatients] = React.useState(initialPatients);
 
+  React.useEffect(() => {
+    setPatients(initialPatients);
+  }, [initialPatients]);
+
   const handleAddPatient = (newPatient: Omit<Patient, 'id' | 'avatar'>) => {
     const createdPatient: Patient = {
       ...newPatient,
       id: `USR${String(patients.length + 1).padStart(3, '0')}`,
-      avatar: `avatar-${(patients.length % 6) + 1}`,
+      avatar: `avatar-${(patients.length % 15) + 1}`,
     };
     setPatients((prev) => [createdPatient, ...prev]);
     setOpen(false);
