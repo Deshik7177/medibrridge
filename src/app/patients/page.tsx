@@ -29,10 +29,20 @@ import {
 import { PatientTable } from './components/patient-table';
 import { patients } from '@/lib/data';
 
-export default function PatientsPage() {
+interface PatientsPageProps {
+  searchParams: {
+    filter?: string;
+  };
+}
+
+export default function PatientsPage({ searchParams }: PatientsPageProps) {
+  const { filter } = searchParams;
+  const validFilters = ['all', 'low', 'medium', 'high'];
+  const defaultTab = (filter && validFilters.includes(filter)) ? filter : 'all';
+
   return (
     <div className="grid flex-1 items-start gap-4 md:gap-8">
-      <Tabs defaultValue="all">
+      <Tabs defaultValue={defaultTab}>
         <div className="flex items-center">
           <TabsList>
             <TabsTrigger value="all">All</TabsTrigger>
