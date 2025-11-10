@@ -102,8 +102,8 @@ export default function Dashboard() {
     <div className="flex min-h-screen w-full flex-col">
       <main className="flex flex-1 flex-col gap-4 md:gap-8">
         <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
-          <Link href="/patients?filter=all">
-            <Card className="transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
+          <Card className="transform transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+            <Link href="/patients?filter=all">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">
                   Total Patients
@@ -116,10 +116,10 @@ export default function Dashboard() {
                   +10% from last month
                 </p>
               </CardContent>
-            </Card>
-          </Link>
-          <Link href="/patients?filter=high">
-            <Card className="transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
+            </Link>
+          </Card>
+          <Card className="transform transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+            <Link href="/patients?filter=high">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">
                   High-Risk Individuals
@@ -134,10 +134,10 @@ export default function Dashboard() {
                   +2 since last week
                 </p>
               </CardContent>
-            </Card>
-          </Link>
-          <Link href="/patients?filter=medium">
-            <Card className="transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
+            </Link>
+          </Card>
+          <Card className="transform transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+            <Link href="/patients?filter=medium">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">
                   Medium-Risk Individuals
@@ -152,9 +152,9 @@ export default function Dashboard() {
                   Stable since last month
                 </p>
               </CardContent>
-            </Card>
-          </Link>
-          <Card className="transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
+            </Link>
+          </Card>
+          <Card className="transform transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
                 Preventive Screenings
