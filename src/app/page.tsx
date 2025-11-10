@@ -52,7 +52,7 @@ const founders = [
   {
     name: 'Ch Tejaswaroop',
     role: 'CEO',
-    avatar: 'https://picsum.photos/seed/founder1/100/100',
+    avatar: '/ceo.jpg',
   },
   {
     name: 'Ahmed Raza',
@@ -67,7 +67,7 @@ const founders = [
   {
     name: 'Pranav Kumar',
     role: 'CMO',
-    avatar: 'https://picsum.photos/seed/founder4/100/100',
+    avatar: '/cmo.jpg',
   },
 ];
 
