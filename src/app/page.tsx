@@ -177,7 +177,7 @@ export default function Dashboard() {
               <CardTitle>Disease Trends</CardTitle>
               <CardDescription>
                 Prevalence of common conditions in the community. Click a bar to
-                filter patients.
+                filter patients below.
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -211,12 +211,14 @@ export default function Dashboard() {
             <CardHeader className="flex flex-row items-center">
               <div className="grid gap-2">
                 <CardTitle>
-                  {selectedCondition
-                    ? `${selectedCondition.charAt(0).toUpperCase() + selectedCondition.slice(1)} Patients`
-                    : 'High-Risk Patients'}
+                  {selectedCondition &&
+                  selectedCondition.charAt(0).toUpperCase() +
+                    selectedCondition.slice(1)}{' '}
+                  Patients
                 </CardTitle>
                 <CardDescription>
-                  {`Individuals requiring priority attention. Now showing ${selectedCondition} patients.`}
+                  Individuals requiring priority attention. Now showing{' '}
+                  {selectedCondition?.toLowerCase()} patients.
                 </CardDescription>
               </div>
               <Button asChild size="sm" className="ml-auto gap-1">
