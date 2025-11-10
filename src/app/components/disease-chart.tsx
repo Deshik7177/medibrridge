@@ -9,6 +9,7 @@ import {
   type ChartConfig,
 } from '@/components/ui/chart';
 import { patients } from '@/lib/data';
+import type { Patient } from '@/lib/types';
 
 const diseaseData = [
   {
@@ -35,10 +36,27 @@ const diseaseChartConfig: ChartConfig = {
   obesity: { label: 'Obesity', color: 'hsl(var(--chart-4))' },
 };
 
-export function DiseaseChart() {
+interface DiseaseChartProps {
+  onBarClick: (condition: string | null) => void;
+}
+
+export function DiseaseChart({ onBarClick }: DiseaseChartProps) {
+  const handleBarClick = (data: any) => {
+    if (data && data.condition) {
+      onBarClick(data.condition);
+    }
+  };
+
   return (
-    <ChartContainer config={diseaseChartConfig} className="min-h-[200px] w-full">
-      <BarChart accessibilityLayer data={diseaseData}>
+    <ChartContainer
+      config={diseaseChartConfig}
+      className="min-h-[200px] w-full"
+    >
+      <BarChart
+        accessibilityLayer
+        data={diseaseData}
+        onClick={(e) => handleBarClick(e?.activePayload?.[0]?.payload)}
+      >
         <CartesianGrid vertical={false} />
         <XAxis
           dataKey="condition"
@@ -47,7 +65,7 @@ export function DiseaseChart() {
           axisLine={false}
         />
         <ChartTooltip content={<ChartTooltipContent />} />
-        <Bar dataKey="count" radius={8} />
+        <Bar dataKey="count" radius={8} className="cursor-pointer" />
       </BarChart>
     </ChartContainer>
   );
