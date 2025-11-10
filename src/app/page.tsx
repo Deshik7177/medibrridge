@@ -57,7 +57,7 @@ const founders = [
   {
     name: 'Ahmed Raza',
     role: 'COO/CTO',
-    avatar: 'https://picsum.photos/seed/founder2/100/100',
+    avatar: '/coo.jpg',
   },
   {
     name: 'Hamid Raza',
